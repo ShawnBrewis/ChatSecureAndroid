@@ -1,0 +1,44 @@
+<project name="jmmp" default="compile" basedir=".">
+
+<property name="jar.suffix" value="" />
+<property name="build.all" value="false" />
+<property file="local.properties" />
+
+<condition property="build-a17">
+	<available file="${sdk-location}/platforms/android-17/android.jar" />
+</condition>
+
+<target name="compile-a17" description="Compile for android API level 4" if="build-a17">
+    <delete dir="build/classes" failonerror="false" />
+    <mkdir dir="build/classes" />
+    <mkdir dir="build/classes/" />
+    <javac
+      target="1.6"
+      srcdir="src"
+      destdir="build/classes/"
+      bootclasspath="${sdk-location}/platforms/android-17/android.jar"
+      debug="true"
+      debuglevel="source,lines"
+    />
+    <jar
+      basedir="build/classes/"
+      destfile="jmmp-mailru-android-17${jar.suffix}.jar"
+      filesonly="true"
+      level="9"
+    />
+    <zip
+      basedir="build"
+      destfile="jmmp-mailru-source${jar.suffix}.zip"
+      filesonly="true"
+      level="9"
+    />
+</target>
+
+<target
+  name="compile"
+  description="Compile for all targets"
+  depends="compile-a17"
+/>
+
+</project>
+
