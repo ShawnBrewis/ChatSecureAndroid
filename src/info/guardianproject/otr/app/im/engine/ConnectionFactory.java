@@ -18,6 +18,7 @@
 package info.guardianproject.otr.app.im.engine;
 
 // import info.guardianproject.otr.app.im.plugin.loopback.LoopbackConnection;
+import info.guardianproject.otr.app.im.plugin.jmmp.JMMPConnection;
 import info.guardianproject.otr.app.im.plugin.xmpp.LLXmppConnection;
 import info.guardianproject.otr.app.im.plugin.xmpp.XmppConnection;
 
@@ -66,6 +67,10 @@ public class ConnectionFactory {
         if ("LLXMPP".equals(settings.get("im.protocol"))) {
             return new LLXmppConnection(context);
         }
+        if ("JMMP".equals(settings.get("im.protocol"))) {
+            return new JMMPConnection(context);
+        }
+        
         /*else if ("LOOPBACK".equals(settings.get("im.protocol"))) {
         	return new SMSConnection();
         } */
